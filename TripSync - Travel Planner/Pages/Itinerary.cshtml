@@ -1,0 +1,24 @@
+﻿@page
+@model TripSync___Travel_Planner.Pages.ItineraryModel
+@{
+    <h2>Itinerary</h2>
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Start</th>
+            <th>End</th>
+        </tr>
+
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Start</td>
+                <td>@item.End</td>
+            </tr>
+        }
+    </table>
+
+    <a href="/AddItinerary?tripId=@Model.TripId">Add Activity</a>
+}

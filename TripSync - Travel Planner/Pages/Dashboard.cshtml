@@ -1,0 +1,34 @@
+﻿@page
+@model TripSync___Travel_Planner.Pages.DashboardModel
+@{
+    <h2>Your Trips</h2>
+
+    <a href="/CreateTrip">Create New Trip</a>
+
+    <h2>My Trips Dashboard</h2>
+
+    <a href="/CreateTrip">+ Create New Trip</a>
+
+    <table border="1">
+        <tr>
+            <th>Trip</th>
+            <th>Destination</th>
+            <th>Total Expense</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var t in Model.Trips)
+        {
+            <tr>
+                <td>@t.Name</td>
+                <td>@t.Destination</td>
+                <td>@t.TotalExpense</td>
+                <td>
+                    <a href="/TripDetails?tripId=@t.Id">Open</a> |
+                    <a href="/DeleteTrip?tripId=@t.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+}

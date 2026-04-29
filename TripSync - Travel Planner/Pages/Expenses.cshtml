@@ -1,0 +1,28 @@
+﻿@page
+@model TripSync___Travel_Planner.Pages.ExpensesModel
+@{
+    <h2>Expenses</h2>
+
+    <p>Total: @Model.Total</p>
+
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Added By</th>
+        </tr>
+
+        @foreach (var e in Model.Expenses)
+        {
+            <tr>
+                <td>@e.Amount</td>
+                <td>@e.Category</td>
+                <td>@e.Description</td>
+                <td>@e.UserName</td>
+            </tr>
+        }
+    </table>
+
+    <a href="/AddExpense?tripId=@Model.TripId">Add Expense</a>
+}

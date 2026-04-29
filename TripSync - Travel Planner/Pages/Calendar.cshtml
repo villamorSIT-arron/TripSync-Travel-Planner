@@ -1,0 +1,14 @@
+﻿@page
+@model TripSync___Travel_Planner.Pages.CalendarModel
+@{
+    <h2>Calendar</h2>
+
+    <ul>
+        @foreach (var e in Model.Events)
+        {
+            <li>
+                <strong>@e.Title</strong> - @e.Start.ToString("yyyy-MM-dd HH:mm")
+            </li>
+        }
+    </ul>
+}

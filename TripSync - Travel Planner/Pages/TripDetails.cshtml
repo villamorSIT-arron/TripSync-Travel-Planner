@@ -1,0 +1,16 @@
+﻿@page
+@model TripDetailsModel
+
+<h2>Trip Details</h2>
+
+<a href="/AddExpense?tripId=@Model.TripId">Add Expense</a> |
+<a href="/AddItinerary?tripId=@Model.TripId">Add Itinerary</a> |
+<a href="/AddMember?tripId=@Model.TripId">Add Member</a> |
+<a href="/Expenses?tripId=@Model.TripId">View Expenses</a> |
+<a href="/Itinerary?tripId=@Model.TripId">View Itinerary</a>
+
+<hr>
+
+<h3>Summary</h3>
+<p>Total Expenses: @Model.TotalExpense</p>
+<p>Total Activities: @Model.TotalActivities</p>
