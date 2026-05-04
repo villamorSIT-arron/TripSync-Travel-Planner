@@ -1,10 +1,35 @@
-﻿@page
+@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="page-shell">
+    <div class="hero-panel">
+        <p class="eyebrow">TripSync</p>
+        <h1>Travel planning that keeps the group moving together.</h1>
+        <p>Create shared trips, track expenses, organize itinerary plans, and keep everyone aligned.</p>
+        <div class="hero-actions">
+            <a asp-page="/Register" class="btn btn-light">Get Started</a>
+            <a asp-page="/Login" class="btn btn-ghost">Login</a>
+        </div>
+    </div>
+
+    <div class="summary-grid">
+        <div class="app-card metric-card">
+            <span class="badge-soft">Trips</span>
+            <h3>Plan destinations</h3>
+            <p class="muted">Create clean trip boards with dates, destinations, and group access.</p>
+        </div>
+        <div class="app-card metric-card">
+            <span class="badge-soft orange">Costs</span>
+            <h3>Track expenses</h3>
+            <p class="muted">Keep shared spending visible with totals and editable expense records.</p>
+        </div>
+        <div class="app-card metric-card">
+            <span class="badge-soft purple">Group</span>
+            <h3>Invite members</h3>
+            <p class="muted">Manage everyone connected to the trip in one collaborative workspace.</p>
+        </div>
+    </div>
+</section>

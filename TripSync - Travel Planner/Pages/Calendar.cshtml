@@ -1,14 +1,21 @@
-﻿@page
+@page
 @model TripSync___Travel_Planner.Pages.CalendarModel
-@{
-    <h2>Calendar</h2>
 
-    <ul>
+<section class="page-shell">
+    <div class="section-heading">
+        <p class="eyebrow">Timeline</p>
+        <h1>Calendar</h1>
+        <p>A quick date-based view of the trip activities.</p>
+    </div>
+
+    <div class="member-grid">
         @foreach (var e in Model.Events)
         {
-            <li>
-                <strong>@e.Title</strong> - @e.Start.ToString("yyyy-MM-dd HH:mm")
-            </li>
+            <article class="app-card member-card">
+                <span class="badge-soft green">@e.Start.ToString("MMM d")</span>
+                <strong>@e.Title</strong>
+                <span class="muted">@e.Start.ToString("yyyy-MM-dd HH:mm")</span>
+            </article>
         }
-    </ul>
-}
+    </div>
+</section>

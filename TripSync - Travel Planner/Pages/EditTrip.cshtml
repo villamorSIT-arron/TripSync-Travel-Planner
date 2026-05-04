@@ -1,22 +1,23 @@
 @page
-@model TripSync___Travel_Planner.Pages.CreateTripModel
+@model TripSync___Travel_Planner.Pages.EditTripModel
 
 <section class="page-shell narrow">
     <div class="section-heading">
-        <p class="eyebrow">New adventure</p>
-        <h1>Create Trip</h1>
-        <p>Start with the essentials. You can add members, costs, and itinerary items after the trip is created.</p>
+        <p class="eyebrow">Trip settings</p>
+        <h1>Edit Trip</h1>
+        <p>Keep the name, destination, and travel dates current for everyone on the plan.</p>
     </div>
 
     <form method="post" class="app-card form-card">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="TripId" type="hidden" />
 
         <label asp-for="TripName" class="form-label"></label>
-        <input asp-for="TripName" class="form-control" type="text" placeholder="Summer in Cebu" required />
+        <input asp-for="TripName" class="form-control" type="text" required />
         <span asp-validation-for="TripName" class="text-danger"></span>
 
         <label asp-for="Destination" class="form-label"></label>
-        <input asp-for="Destination" class="form-control" type="text" placeholder="Cebu, Philippines" required />
+        <input asp-for="Destination" class="form-control" type="text" required />
         <span asp-validation-for="Destination" class="text-danger"></span>
 
         <label asp-for="StartDate" class="form-label"></label>
@@ -27,8 +28,8 @@
         <span asp-validation-for="EndDate" class="text-danger"></span>
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Create Trip</button>
-            <a asp-page="/Dashboard" class="btn btn-ghost">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a asp-page="/TripDetails" asp-route-tripId="@Model.TripId" class="btn btn-ghost">Cancel</a>
         </div>
     </form>
 </section>

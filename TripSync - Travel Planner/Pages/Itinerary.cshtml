@@ -1,24 +1,37 @@
-﻿@page
+@page
 @model TripSync___Travel_Planner.Pages.ItineraryModel
-@{
-    <h2>Itinerary</h2>
 
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Start</th>
-            <th>End</th>
-        </tr>
+<section class="page-shell">
+    <div class="section-heading">
+        <p class="eyebrow">Daily plan</p>
+        <h1>Itinerary</h1>
+        <p>Keep activities ordered by time so the group knows what is happening next.</p>
+    </div>
 
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>@item.Title</td>
-                <td>@item.Start</td>
-                <td>@item.End</td>
-            </tr>
-        }
-    </table>
+    <div class="quick-actions">
+        <a asp-page="/AddItinerary" asp-route-tripId="@Model.TripId" class="btn btn-success">Add Activity</a>
+        <a asp-page="/TripDetails" asp-route-tripId="@Model.TripId" class="btn btn-ghost">Back to Trip</a>
+    </div>
 
-    <a href="/AddItinerary?tripId=@Model.TripId">Add Activity</a>
-}
+    <div class="app-card table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Start</th>
+                    <th>End</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td><strong>@item.Title</strong></td>
+                    <td>@item.Start.ToString("g")</td>
+                    <td>@item.End.ToString("g")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</section>

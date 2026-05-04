@@ -1,10 +1,26 @@
-﻿@page
+@page
 @model TripSync___Travel_Planner.Pages.AddMemberModel
-@{
-    <h2>Add Member</h2>
 
-    <form method="post">
-        <input type="email" name="Email" placeholder="User Email" required />
-        <button type="submit">Add</button>
+<section class="page-shell narrow">
+    <div class="section-heading">
+        <p class="eyebrow">Collaboration</p>
+        <h1>Add Member</h1>
+        <p>Invite another registered traveler into the shared trip workspace.</p>
+    </div>
+
+    <form method="post" class="app-card form-card">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="TripId" type="hidden" />
+
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" type="email" placeholder="friend@example.com" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-accent">Add Member</button>
+            <a asp-page="/TripDetails" asp-route-tripId="@Model.TripId" class="btn btn-ghost">Cancel</a>
+        </div>
     </form>
-}
+</section>
+
+<partial name="_ValidationScriptsPartial" />

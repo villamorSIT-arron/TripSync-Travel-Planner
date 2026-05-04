@@ -1,16 +1,54 @@
-﻿@page
+@page
 @model TripDetailsModel
 
-<h2>Trip Details</h2>
+<section class="page-shell">
+    <div class="hero-panel">
+        <p class="eyebrow">Trip overview</p>
+        <h1>@Model.TripName</h1>
+        <p>@Model.Destination · @Model.StartDate.ToString("MMM d, yyyy") to @Model.EndDate.ToString("MMM d, yyyy")</p>
+        <div class="hero-actions">
+            <a asp-page="/AddExpense" asp-route-tripId="@Model.TripId" class="btn btn-light">Add Expense</a>
+            <a asp-page="/AddItinerary" asp-route-tripId="@Model.TripId" class="btn btn-ghost">Add Itinerary</a>
+            <a asp-page="/EditTrip" asp-route-tripId="@Model.TripId" class="btn btn-ghost">Edit Trip</a>
+        </div>
+    </div>
 
-<a href="/AddExpense?tripId=@Model.TripId">Add Expense</a> |
-<a href="/AddItinerary?tripId=@Model.TripId">Add Itinerary</a> |
-<a href="/AddMember?tripId=@Model.TripId">Add Member</a> |
-<a href="/Expenses?tripId=@Model.TripId">View Expenses</a> |
-<a href="/Itinerary?tripId=@Model.TripId">View Itinerary</a>
+    <div class="summary-grid">
+        <div class="app-card metric-card">
+            <p class="metric-label">Total expenses</p>
+            <p class="metric-value">@Model.TotalExpense.ToString("C")</p>
+        </div>
+        <div class="app-card metric-card">
+            <p class="metric-label">Activities</p>
+            <p class="metric-value">@Model.TotalActivities</p>
+        </div>
+        <div class="app-card metric-card">
+            <p class="metric-label">Members</p>
+            <p class="metric-value">@Model.Members.Count</p>
+        </div>
+    </div>
 
-<hr>
+    <div class="quick-actions">
+        <a asp-page="/Expenses" asp-route-tripId="@Model.TripId" class="btn btn-primary">View Expenses</a>
+        <a asp-page="/Itinerary" asp-route-tripId="@Model.TripId" class="btn btn-success">View Itinerary</a>
+        <a asp-page="/Calendar" asp-route-tripId="@Model.TripId" class="btn btn-ghost">Calendar</a>
+        <a asp-page="/AddMember" asp-route-tripId="@Model.TripId" class="btn btn-accent">Add Member</a>
+    </div>
 
-<h3>Summary</h3>
-<p>Total Expenses: @Model.TotalExpense</p>
-<p>Total Activities: @Model.TotalActivities</p>
+    <div class="section-heading">
+        <p class="eyebrow">Collaboration</p>
+        <h2>Trip Members</h2>
+        <p>Everyone connected to this trip appears here with their current role.</p>
+    </div>
+
+    <div class="member-grid">
+        @foreach (var member in Model.Members)
+        {
+            <article class="app-card member-card">
+                <span class="badge-soft purple">@member.Role</span>
+                <strong>@member.Name</strong>
+                <span class="muted">@member.Email</span>
+            </article>
+        }
+    </div>
+</section>

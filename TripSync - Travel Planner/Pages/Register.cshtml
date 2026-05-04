@@ -1,10 +1,33 @@
-﻿@page
+@page
 @model TripSync___Travel_Planner.Pages.RegisterModel
-@{
-    <form method="post">
-        <input type="text" name="Name" placeholder="Name" required />
-        <input type="email" name="Email" placeholder="Email" required />
-        <input type="password" name="Password" placeholder="Password" required />
-        <button type="submit">Register</button>
+
+<section class="page-shell narrow">
+    <div class="section-heading">
+        <p class="eyebrow">Start planning</p>
+        <h1>Create Account</h1>
+        <p>Set up your TripSync profile so you can create trips and join shared plans.</p>
+    </div>
+
+    <form method="post" class="app-card form-card">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" type="text" placeholder="Alex Traveler" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" type="email" placeholder="you@example.com" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" class="form-control" type="password" required />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Register</button>
+            <a asp-page="/Login" class="btn btn-ghost">Login Instead</a>
+        </div>
     </form>
-}
+</section>
+
+<partial name="_ValidationScriptsPartial" />

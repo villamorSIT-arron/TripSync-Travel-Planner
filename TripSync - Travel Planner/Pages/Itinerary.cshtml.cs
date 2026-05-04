@@ -18,8 +18,15 @@ namespace TripSync___Travel_Planner.Pages
         public int TripId { get; set; }
         public List<Item> Items { get; set; } = new();
 
-        public void OnGet(int tripId)
+        public IActionResult OnGet(int tripId)
         {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToPage("/Login");
+
+            if (!_db.IsTripMember(tripId, userId.Value))
+                return RedirectToPage("/Dashboard");
+
             TripId = tripId;
 
             using var conn = _db.GetConnection();
@@ -40,11 +47,13 @@ namespace TripSync___Travel_Planner.Pages
                     End = reader.GetDateTime("end_datetime")
                 });
             }
+
+            return Page();
         }
 
         public class Item
         {
-            public string Title { get; set; }
+            public string Title { get; set; } = string.Empty;
             public DateTime Start { get; set; }
             public DateTime End { get; set; }
         }

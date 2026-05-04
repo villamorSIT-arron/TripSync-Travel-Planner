@@ -1,34 +1,63 @@
-﻿@page
+@page
 @model TripSync___Travel_Planner.Pages.DashboardModel
-@{
-    <h2>Your Trips</h2>
 
-    <a href="/CreateTrip">Create New Trip</a>
+<section class="page-shell">
+    <div class="hero-panel">
+        <p class="eyebrow">Travel planner</p>
+        <h1>Plan cleaner trips with your people, places, and costs in sync.</h1>
+        <p>Track destinations, shared budgets, itinerary plans, and group members from one modern dashboard.</p>
+        <div class="hero-actions">
+            <a asp-page="/CreateTrip" class="btn btn-light">Create New Trip</a>
+            <a asp-page="/Dashboard" class="btn btn-ghost">View Trips</a>
+        </div>
+    </div>
 
-    <h2>My Trips Dashboard</h2>
+    <div class="section-heading">
+        <p class="eyebrow">Your workspace</p>
+        <h2>Upcoming Trips</h2>
+        <p>Open a trip to manage expenses, itinerary items, members, and trip details.</p>
+    </div>
 
-    <a href="/CreateTrip">+ Create New Trip</a>
+    @if (Model.Trips.Count == 0)
+    {
+        <div class="app-card empty-state">
+            <span class="badge-soft green">Ready when you are</span>
+            <h2>No trips yet</h2>
+            <p class="muted">Create your first trip and TripSync will keep the plan organized from day one.</p>
+            <a asp-page="/CreateTrip" class="btn btn-primary">Create Trip</a>
+        </div>
+    }
+    else
+    {
+        <div class="trip-grid">
+            @foreach (var t in Model.Trips)
+            {
+                <article class="app-card trip-card">
+                    <div class="trip-card-header">
+                        <div>
+                            <span class="badge-soft">@t.StartDate.ToString("MMM d") - @t.EndDate.ToString("MMM d")</span>
+                            <h2>@t.Name</h2>
+                            <p class="muted">@t.Destination</p>
+                        </div>
+                        <span class="badge-soft purple">@t.MemberCount members</span>
+                    </div>
 
-    <table border="1">
-        <tr>
-            <th>Trip</th>
-            <th>Destination</th>
-            <th>Total Expense</th>
-            <th>Actions</th>
-        </tr>
+                    <div class="summary-grid">
+                        <div>
+                            <p class="metric-label">Shared costs</p>
+                            <p class="metric-value">@t.TotalExpense.ToString("C")</p>
+                        </div>
+                    </div>
 
-        @foreach (var t in Model.Trips)
-        {
-            <tr>
-                <td>@t.Name</td>
-                <td>@t.Destination</td>
-                <td>@t.TotalExpense</td>
-                <td>
-                    <a href="/TripDetails?tripId=@t.Id">Open</a> |
-                    <a href="/DeleteTrip?tripId=@t.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </table>
-
-}
+                    <div class="card-actions">
+                        <a asp-page="/TripDetails" asp-route-tripId="@t.Id" class="btn btn-primary">Open</a>
+                        <a asp-page="/EditTrip" asp-route-tripId="@t.Id" class="btn btn-ghost">Edit</a>
+                        <form method="post" asp-page="/DeleteTrip" asp-route-tripId="@t.Id" class="d-inline">
+                            <button type="submit" class="btn-link-danger">Delete</button>
+                        </form>
+                    </div>
+                </article>
+            }
+        </div>
+    }
+</section>

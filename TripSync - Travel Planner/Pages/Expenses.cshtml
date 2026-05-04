@@ -1,28 +1,59 @@
-﻿@page
+@page
 @model TripSync___Travel_Planner.Pages.ExpensesModel
-@{
-    <h2>Expenses</h2>
 
-    <p>Total: @Model.Total</p>
+<section class="page-shell">
+    <div class="section-heading">
+        <p class="eyebrow">Shared budget</p>
+        <h1>Expenses</h1>
+        <p>Review, edit, and remove costs for this trip.</p>
+    </div>
 
-    <table>
-        <tr>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Added By</th>
-        </tr>
+    <div class="summary-grid">
+        <div class="app-card metric-card">
+            <p class="metric-label">Total spend</p>
+            <p class="metric-value">@Model.Total.ToString("C")</p>
+        </div>
+        <div class="app-card metric-card">
+            <p class="metric-label">Expense entries</p>
+            <p class="metric-value">@Model.Expenses.Count</p>
+        </div>
+    </div>
 
-        @foreach (var e in Model.Expenses)
-        {
-            <tr>
-                <td>@e.Amount</td>
-                <td>@e.Category</td>
-                <td>@e.Description</td>
-                <td>@e.UserName</td>
-            </tr>
-        }
-    </table>
+    <div class="quick-actions">
+        <a asp-page="/AddExpense" asp-route-tripId="@Model.TripId" class="btn btn-primary">Add Expense</a>
+        <a asp-page="/TripDetails" asp-route-tripId="@Model.TripId" class="btn btn-ghost">Back to Trip</a>
+    </div>
 
-    <a href="/AddExpense?tripId=@Model.TripId">Add Expense</a>
-}
+    <div class="app-card table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Added By</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var e in Model.Expenses)
+            {
+                <tr>
+                    <td><strong>@e.Amount.ToString("C")</strong></td>
+                    <td><span class="badge-soft orange">@e.Category</span></td>
+                    <td>@e.Description</td>
+                    <td>@e.UserName</td>
+                    <td>@e.ExpenseDate.ToString("MMM d, yyyy")</td>
+                    <td>
+                        <a asp-page="/EditExpense" asp-route-expenseId="@e.Id" asp-route-tripId="@Model.TripId">Edit</a>
+                        <form method="post" asp-page="/DeleteExpense" asp-route-expenseId="@e.Id" asp-route-tripId="@Model.TripId" class="d-inline">
+                            <button type="submit" class="btn-link-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</section>

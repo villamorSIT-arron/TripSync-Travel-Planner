@@ -1,9 +1,29 @@
-﻿@page
+@page
 @model TripSync___Travel_Planner.Pages.LoginModel
-@{
-    <form method="post">
-        <input type="email" name="Email" placeholder="Email" required />
-        <input type="password" name="Password" placeholder="Password" required />
-        <button type="submit">Login</button>
+
+<section class="page-shell narrow">
+    <div class="section-heading">
+        <p class="eyebrow">Welcome back</p>
+        <h1>Login</h1>
+        <p>Open your travel workspace and continue planning with your group.</p>
+    </div>
+
+    <form method="post" class="app-card form-card">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" type="email" placeholder="you@example.com" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" class="form-control" type="password" required />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <a asp-page="/Register" class="btn btn-ghost">Create Account</a>
+        </div>
     </form>
-}
+</section>
+
+<partial name="_ValidationScriptsPartial" />

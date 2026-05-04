@@ -1,5 +1,33 @@
-﻿@page
-@model TripSync___Travel_Planner.Pages.ItineraryModel
-@{
+@page
+@model TripSync___Travel_Planner.Pages.AddItineraryModel
 
-}
+<section class="page-shell narrow">
+    <div class="section-heading">
+        <p class="eyebrow">Daily plan</p>
+        <h1>Add Itinerary Item</h1>
+        <p>Add a time-boxed activity to keep the group plan clear and easy to scan.</p>
+    </div>
+
+    <form method="post" class="app-card form-card">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="TripId" type="hidden" />
+
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" type="text" placeholder="Island hopping" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
+
+        <label asp-for="Start" class="form-label"></label>
+        <input asp-for="Start" class="form-control" type="datetime-local" required />
+
+        <label asp-for="End" class="form-label"></label>
+        <input asp-for="End" class="form-control" type="datetime-local" required />
+        <span asp-validation-for="End" class="text-danger"></span>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success">Add Itinerary</button>
+            <a asp-page="/Itinerary" asp-route-tripId="@Model.TripId" class="btn btn-ghost">Cancel</a>
+        </div>
+    </form>
+</section>
+
+<partial name="_ValidationScriptsPartial" />
